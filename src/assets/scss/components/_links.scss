@@ -1,0 +1,27 @@
+
+
+.link-btn {
+    margin: 50px 0;
+    color: white;
+    font-family: $snigletRegular;
+    background-color: $orange;
+    border-radius: 5px;
+    padding: 15px;
+    &:hover {
+        background-color: white;
+        color: $orange;
+    }
+      // &::after {
+                //     content: ">";
+        
+                // }
+                // &:hover::after{
+                //     content: ">";
+                //     position: relative;
+                //     left: 5px;
+                    
+                // }
+
+            // }
+    
+}

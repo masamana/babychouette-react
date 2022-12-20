@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./assets/scss/style.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Accueil from "./pages/Accueil";
+import Qsn from "./pages/Qsn";
+import ListArticles from "./pages/ListArticles";
+import ShowArticle from "./pages/ShowArticle";
+import CreateArticle from "./pages/CreateArticle";
+import UpdateArticle from "./pages/UpdateArticle";
+import Mam from "./pages/Mam";
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/qui-sommes-nous" element={<Qsn />}/>
+          <Route path="/mam-babychouette" element={<Mam />}/>
+          <Route path="/articles" element={<ListArticles />} />
+          <Route path="/article/show/:id" element={<ShowArticle />} />
+          <Route path="/article/create" element={<CreateArticle />} />
+          <Route path="/article/update/:id" element={<UpdateArticle />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -1,0 +1,21 @@
+#qsn {
+    background-color: #F6BB62;
+    width: 100%;
+    .container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .content {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .img-size {
+            width: 50%;
+        }
+        p {
+            width: 50%;
+        }
+    }
+}

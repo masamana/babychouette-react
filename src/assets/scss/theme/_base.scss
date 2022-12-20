@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-family: $snigletRegular;
+    margin: 50px 0;
+    text-transform: uppercase;
+    color: $orange;
+    text-align: center;
+    
+}
+
+h2 {
+    font-family: $snigletRegular;
+    text-align: center;
+    color: $orange;
+    
+}
+
+a {
+    text-decoration: none;
+    color: $bleu;
+}
+
+ul {
+    list-style: none;
+}

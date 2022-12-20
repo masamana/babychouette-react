@@ -1,0 +1,18 @@
+article {
+    h1 {
+        text-align: center;
+        color: $orange;
+    }
+    .content-article {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 20px;
+        
+        .img-article {
+            width: 50%;
+    
+        }
+
+    }
+}
