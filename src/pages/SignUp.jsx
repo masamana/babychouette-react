@@ -4,32 +4,112 @@ import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
+
+    
+
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const repassword = event.target.repassword.value;
+    const name = event.target.name.value;
+    const first_name = event.target.first_name.value;
+    const tel = event.target.tel.value;
+    const adress = event.target.adress.value;
+
+
+    fetch("http://localhost:8080/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        repassword,
+        name,
+        first_name,
+        tel,adress
+        
+      }),
+    });
+  };
+
+
     return (
         <>
         <Header />
-        <form>
-         <input type="radio" name="radio1" value="monsieur" />
+        <form onSubmit={handleSubmit}>
+         {/* <input type="radio" name="radio1" value="monsieur" />
           <label>M.</label>
           <input type="radio" name="radio1" value="madame" />
-          <label>Mme.</label><br /><br />
-
-          <label>Entrez votre prénom *</label><br />
+          <label>Mme.</label><br /><br /> */}
+          <label>Entrez votre email *</label><br />
           <input
-            type="text"
-            id="Prenom"
-            name="Prenom"
-            placeholder="Prénom"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="abc@gmail.com"
             required
+          /><br /><br />
+
+          <label>Entrez votre mot de passe</label><br />
+          <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Mot de passe"
+              required
+          /><br /><br />
+
+          <label>Vérification mot de passe</label><br />
+          <input
+              type="password"
+              id="repassword"
+              name="repassword"
+              placeholder="Mot de passe"
+              required
           /><br /><br />
 
           <label>Entrez votre nom *</label><br />
           <input
             type="text"
-            name="nom"
-            id="nom"
-            placeholder="nom"
+            name="name"
+            id="name"
+            placeholder="Nom"
             required
           /><br /><br />
+
+          <label>Entrez votre prénom *</label><br />
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            placeholder="Prénom"
+            required
+          /><br /><br />
+
+          <label>Téléphone *</label><br />
+          <input
+            type="text"
+            id="tel"
+            name="tel"
+            placeholder="Tél"
+            required
+          /><br /><br />
+
+          <label>Adresse *</label><br />
+          <input
+            type="text"
+            id="adress"
+            name="adress"
+            placeholder="Adresse"
+            required
+          /><br /><br />
+
 
   
           <input className="link-btn" type="submit" value="Envoyer" />
