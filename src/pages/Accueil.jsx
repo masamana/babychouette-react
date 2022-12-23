@@ -1,6 +1,7 @@
-import Header from "../components/Header";
 import { Link } from "react-router-dom";
-import BlogExtract from "../components/LastArticles";
+import Header from "../components/Header";
+import LastArticles from "../components/LastArticles";
+import Footer from "../components/Footer";
 
 
 const Accueil = () => {
@@ -19,7 +20,7 @@ const Accueil = () => {
           </div>
         </section>
 
-        <section className="home-mam">
+        <section className="home home-mam">
         <div className="container">
             <article className="content">
               <h2>La mam</h2>
@@ -29,9 +30,10 @@ const Accueil = () => {
           </div>
         </section>
       
-        <BlogExtract />
+        <LastArticles />
 
       </main>
+      <Footer />
     </> 
   );
 };

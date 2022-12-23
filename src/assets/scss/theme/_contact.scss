@@ -1,0 +1,19 @@
+.contact {
+    
+    .form-container {
+        display: flex;
+        justify-content: center;
+        padding: 25px 0;
+        form {
+            font-family: "CabinRegular";
+            width: 50%;
+            text-align: center;
+            border: 1px solid #CE7E33;
+       }
+    }
+
+}
+
+// textarea {
+//     resize: vertical;
+// }

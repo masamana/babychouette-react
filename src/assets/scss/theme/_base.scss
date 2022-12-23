@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
 }
+
 h1 {
     font-family: $snigletRegular;
     margin: 50px 0;
@@ -15,15 +16,34 @@ h1 {
 h2 {
     font-family: $snigletRegular;
     text-align: center;
+    text-transform: uppercase;
     color: $orange;
+    padding: 25px;
+    
+}
+
+h3 {
+    font-family: $snigletRegular;
+    text-align: center;
+    color: $orange;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+p {
+    font-family: $cabinRegular;
     
 }
 
 a {
     text-decoration: none;
     color: $bleu;
+    font-family: $snigletRegular;
 }
 
 ul {
     list-style: none;
+}
+li {
+    font-family: $snigletRegular;
 }

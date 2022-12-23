@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-const Blog = () => {
+const ListArticles = () => {
     const [articles, setArticles] = useState([]);
   
     // const handleDelete = async (id) => {
@@ -30,44 +31,32 @@ const Blog = () => {
         <main> 
           <h1>Blog</h1>
           <section className="list-articles">
-            <article className="card-article">
               {articles.map((article) => {
                 return (
-                  <div key={article.id}>
-                    {/* <button onClick={() => handleDelete(article.id)}>Supprimer</button> */}
-                    <h2>{article.title}</h2>
-                    <img src="/img/jeuCouleur.jpg" alt=""/>
-                    <p>{article.content}</p>
-                    <Link className="link-btn" to={"/article/show/" + article.id}>Lire l'article</Link>
-                  </div>
+                  <article className="card-article" key={article.id}>
+                    <div class="card-header">
+                      <img className="img-size" src="/img/jeuCouleur.jpg" alt=""/>
+                      {/* ajouter img.article pour appeler mon api et consommer ma donnée (fetch) */}
+                      {/* <button onClick={() => handleDelete(article.id)}>Supprimer</button> */}
+                    </div>
+                    <div className="card-body">
+
+                      <h2>{article.title}</h2>
+                      {/* <p>{article.content}</p> */}
+                      {/* ajouter une limite d'affichage aux 200 premiers caractères */}
+                      {/* <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div> */}
+                      <Link className="link-btn" to={"/article/show/" + article.id}>Lire l'article</Link>
+                    </div>
+                  </article>
                 );
               })}
-            </article>
           </section>
         </main>
-
-        <article class="actualite">
-            <h3>ACTUALITÉS</h3>
-            <div class="article-cover">
-              <img
-                src="assets/img/Launch-Details-580.jpg"
-                alt="fond"
-                class="img-size"
-              />
-            </div>
-            <div class="contenu">
-              <h4>Actualités du jour</h4>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Molestiae ut eius eligendi voluptate porro iste quos temporibus
-                veniam autem. At.
-              </p>
-            </div>
-          </article>
+        <Footer />
       </>
     );
   };
   
 
 
-export default Blog;
+export default ListArticles;

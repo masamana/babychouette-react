@@ -1,7 +1,60 @@
 main {
+    // display: grid;
+    // place-items: center;
+    
     .list-articles {
-        
+        background-color: $blanc;
+        margin: 50px 0;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        // max-width: 1200px;
+        // margin-block: 2rem;
+        gap: 2rem;
+
+        .card-article {
+
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            border: 1px solid black;
+            position: relative;
+
+            .card-header {
+
+                width: 100%;
+                height: 50%;
+
+                .img-size {
+
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .card-body {
+                
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                
+                
+                .link-btn {
+                    position: absolute;
+                    top: 80%;
+                }
+            }
+        }
     }
 }
+
+// .cut_text {
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+// }
+// css à ajouter si besoin de couper le text dans les blog-cards
 
     

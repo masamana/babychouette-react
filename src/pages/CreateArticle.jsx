@@ -18,10 +18,9 @@ const CreateArticle = () => {
     const id_users = event.target.id_users.value;
     const id_categories = event.target.id_categories.value;
 
-    console.log(event);
 
     fetch("http://localhost:8080/api/articles", {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,8 +35,6 @@ const CreateArticle = () => {
     });
   };
 
-
-//   [{"message":"\"id_users\" is required","path":["id_users"],"type":"any.required","context":{"label":"id_users","key":"id_users"}}]
 
   return (
     <>

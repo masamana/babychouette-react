@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import Footer from "../components/Footer";
 
 const ShowArticle = () => {
 
@@ -25,12 +26,13 @@ const ShowArticle = () => {
         <Header/>
           <article>
               <h1>{article.title}</h1>
+              <Link className="link-btn" to={"/articles"}>Retour au blog</Link>
               <div className="content-article">
                 <p>{article.content}</p>
                 <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
               </div>
-              <Link to={"/articles"}>Retour au blog</Link>
           </article>
+          <Footer />
         </>
     )
 }

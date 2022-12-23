@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const Mam = () => {
     return (
@@ -7,11 +8,12 @@ const Mam = () => {
         <Header />
         <main>
             <h1>Visite de la Mam</h1>
-            <section id="mam">
+            <section className="mam">
 
             </section>
         
         </main>
+        <Footer />
         </>
 
     )

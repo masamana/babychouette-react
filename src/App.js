@@ -5,8 +5,12 @@ import Qsn from "./pages/Qsn";
 import ListArticles from "./pages/ListArticles";
 import ShowArticle from "./pages/ShowArticle";
 import CreateArticle from "./pages/CreateArticle";
+import SignUp from "./pages/SignUp";
 import UpdateArticle from "./pages/UpdateArticle";
 import Mam from "./pages/Mam";
+import Contact from "./pages/Contact";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 
 
 
@@ -22,6 +26,10 @@ function App() {
           <Route path="/article/show/:id" element={<ShowArticle />} />
           <Route path="/article/create" element={<CreateArticle />} />
           <Route path="/article/update/:id" element={<UpdateArticle />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/creation-compte" element={<SignUp />} />
+          <Route path="/login/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>

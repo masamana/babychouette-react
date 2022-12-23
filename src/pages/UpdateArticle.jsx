@@ -49,11 +49,11 @@ const UpdateArticle = () => {
           </label>
           <label>
             Contenu
-            <input type="text" name="content" value={article.content} />
+            <textarea type="text" name="content" value={article.content} />
           </label>
           <label>
             Image
-            <input type="text" name="img" />
+            <input type="file" name="img" />
           </label>
           <label>
             id_categories
