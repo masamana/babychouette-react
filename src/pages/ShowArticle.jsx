@@ -26,11 +26,17 @@ const ShowArticle = () => {
         <Header/>
           <article>
               <h1>{article.title}</h1>
-              <Link className="link-btn" to={"/articles"}>Retour au blog</Link>
-              <div className="content-article">
-                <p>{article.content}</p>
-                <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
+              <div className="container">
+                <h2>Sous titre de l'article - Catégorie</h2>
+                  <div className="img-container">
+                    <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
+                  </div>
+                <div className="content-article">
+                  <p>{article.content}</p>
+                </div>
               </div>
+             
+              <Link className="link-btn" to={"/articles"}>Retour au blog</Link>
           </article>
           <Footer />
         </>

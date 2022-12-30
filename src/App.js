@@ -11,6 +11,7 @@ import Mam from "./pages/Mam";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import AdminPanel from "./pages/AdminPanel";
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/creation-compte" element={<SignUp />} />
           <Route path="/login/admin" element={<Admin />} />
+          <Route path="/admin-panel" element={<AdminPanel />} />
         </Routes>
       </BrowserRouter>
     </>

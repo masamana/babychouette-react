@@ -1,0 +1,23 @@
+.create-account {
+    .form-container {
+        display: flex;
+        justify-content: center;
+        padding: 25px 0;
+        form {
+            font-family: $cabinRegular;
+            width: 50%;
+            text-align: center;
+            border: 1px solid $orange;
+       }
+    }
+    .signup-container {
+        padding: 25px 0;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+   }
+}

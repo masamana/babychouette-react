@@ -3,7 +3,6 @@ main {
     // place-items: center;
     
     .list-articles {
-        background-color: $blanc;
         margin: 50px 0;
 
         display: flex;
@@ -18,7 +17,8 @@ main {
             display: flex;
             flex-direction: column;
             width: 25%;
-            border: 1px solid black;
+            // border: 1px solid black;
+            box-shadow: 10px 5px 5px darkgray;
             position: relative;
 
             .card-header {

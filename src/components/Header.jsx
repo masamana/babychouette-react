@@ -6,11 +6,13 @@ const Header = () => {
       <nav className="nav-menu">
         <ul>
           <li id="logo">
+            {/* <Link to="/login/admin"> */}
             <img
               className="logo"
               src="/img/babychouette-logo-blanc.png"
               alt="Logo Babychouette"
             />
+            {/* </Link> */}
           </li>
           <li>
               <Link to="/">Accueil</Link>
@@ -27,9 +29,9 @@ const Header = () => {
           <li>
               <Link to="/contact">Contact</Link>
           </li>
-          <li>
+          {/* <li>
               <Link to="/article/create">Créer un article</Link>
-          </li>
+          </li> */}
           <li>
               <Link to="/login">Coin des parents</Link>
           </li>

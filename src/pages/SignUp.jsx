@@ -10,8 +10,6 @@ const SignUp = () => {
 
     // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
 
-    
-
     const email = event.target.email.value;
     const password = event.target.password.value;
     const repassword = event.target.repassword.value;
@@ -32,7 +30,8 @@ const SignUp = () => {
         repassword,
         name,
         first_name,
-        tel,adress
+        tel,
+        adress
         
       }),
     });
@@ -42,80 +41,89 @@ const SignUp = () => {
     return (
         <>
         <Header />
-        <form onSubmit={handleSubmit}>
-         {/* <input type="radio" name="radio1" value="monsieur" />
-          <label>M.</label>
-          <input type="radio" name="radio1" value="madame" />
-          <label>Mme.</label><br /><br /> */}
-          <label>Entrez votre email *</label><br />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="abc@gmail.com"
-            required
-          /><br /><br />
+        <h1>Création d'un compte</h1>
+        <section className="create-account">
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+            {/* <input type="radio" name="radio1" value="monsieur" />
+              <label>M.</label>
+              <input type="radio" name="radio1" value="madame" />
+              <label>Mme.</label><br /><br /> */}
+              <label>Entrez votre email *</label><br />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="abc@gmail.com"
+                required
+              /><br /><br />
 
-          <label>Entrez votre mot de passe</label><br />
-          <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Mot de passe"
-              required
-          /><br /><br />
+              <label>Entrez votre mot de passe</label><br />
+              <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Mot de passe"
+                  required
+              /><br /><br />
 
-          <label>Vérification mot de passe</label><br />
-          <input
-              type="password"
-              id="repassword"
-              name="repassword"
-              placeholder="Mot de passe"
-              required
-          /><br /><br />
+              <label>Vérification mot de passe</label><br />
+              <input
+                  type="password"
+                  id="repassword"
+                  name="repassword"
+                  placeholder="Mot de passe"
+                  required
+              /><br /><br />
 
-          <label>Entrez votre nom *</label><br />
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Nom"
-            required
-          /><br /><br />
+              <label>Entrez votre nom *</label><br />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Nom"
+                required
+              /><br /><br />
 
-          <label>Entrez votre prénom *</label><br />
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            placeholder="Prénom"
-            required
-          /><br /><br />
+              <label>Entrez votre prénom *</label><br />
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                placeholder="Prénom"
+                required
+              /><br /><br />
 
-          <label>Téléphone *</label><br />
-          <input
-            type="text"
-            id="tel"
-            name="tel"
-            placeholder="Tél"
-            required
-          /><br /><br />
+              <label>Téléphone *</label><br />
+              <input
+                type="text"
+                id="tel"
+                name="tel"
+                placeholder="Tél"
+                required
+              /><br /><br />
 
-          <label>Adresse *</label><br />
-          <input
-            type="text"
-            id="adress"
-            name="adress"
-            placeholder="Adresse"
-            required
-          /><br /><br />
-
-
+              <label>Adresse *</label><br />
+              <input
+                type="text"
+                id="adress"
+                name="adress"
+                placeholder="Adresse"
+                required
+              /><br /><br />
   
-          <input className="link-btn" type="submit" value="Envoyer" />
-          </form>
+              <input className="link-btn" type="submit" value="Envoyer" />
+            </form>
+          </div>
+          <div className="signup-container">
+                        <div className="content">
+                            <p>Maintenant vous pouvez vous connecter !</p>
+                            <Link className="link-btn" to="/login">Retour</Link>
+                        </div>
+                    </div>
+          
+        </section>
 
-          <Link className="link-btn" to="/login">Retour</Link>
 
 
         <Footer />
