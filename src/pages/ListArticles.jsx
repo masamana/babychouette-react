@@ -37,7 +37,7 @@ const ListArticles = () => {
                     <div class="card-header">
                       <img className="img-size" src="/img/jeuCouleur.jpg" alt=""/>
                       {/* ajouter img.article pour appeler mon api et consommer ma donnée (fetch) */}
-                      {/* <button onClick={() => handleDelete(article.id)}>Supprimer</button> */}
+                      
                     </div>
                     <div className="card-body">
 

@@ -10,8 +10,11 @@ import UpdateArticle from "./pages/UpdateArticle";
 import Mam from "./pages/Mam";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
-import AdminPanel from "./pages/AdminPanel";
+
+import DashboardAdmin from "./pages/DashboardAdmin";
+import FeedBack from "./pages/FeedBack";
+import ArticleById from "./pages/ArticleById";
+
 
 
 
@@ -23,15 +26,21 @@ function App() {
           <Route path="/" element={<Accueil />} />
           <Route path="/qui-sommes-nous" element={<Qsn />}/>
           <Route path="/mam-babychouette" element={<Mam />}/>
-          <Route path="/articles" element={<ListArticles />} />
-          <Route path="/article/show/:id" element={<ShowArticle />} />
-          <Route path="/article/create" element={<CreateArticle />} />
-          <Route path="/article/update/:id" element={<UpdateArticle />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/creation-compte" element={<SignUp />} />
-          <Route path="/login/admin" element={<Admin />} />
-          <Route path="/admin-panel" element={<AdminPanel />} />
+          <Route path="/avis-parents" element={<FeedBack />} />
+
+          <Route path="/articles" element={<ListArticles />} />
+          <Route path="/article/show/:id" element={<ShowArticle />} />
+          
+          <Route path="/create-article" element={<CreateArticle />} />
+          <Route path="/article/:id" element={<ArticleById />} />
+          <Route path="/article/update/:id" element={<UpdateArticle />} />
+          
+
+          <Route path="/dashboard" element={<DashboardAdmin />} />
         </Routes>
       </BrowserRouter>
     </>

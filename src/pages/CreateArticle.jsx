@@ -1,28 +1,32 @@
+import { useState } from "react";
 import Header from "../components/Header";
 
 const CreateArticle = () => {
-  // créer un formulaire avec un champ title et un champ content
+  // créer un formulaire avec champs requis
   // lors du submit du formulaire, on envoie les données du formulaire au serveur avec
-  // une requête fetch de type POST sur l'URL http://localhost:5000/api/articles
-
-  const handleSubmit = (event) => {
+  // une requête fetch de type POST sur l'URL http://localhost:8080/api/articles
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
-
     
-
+    const jwtLocalStorage = localStorage.getItem('jwt');
+    const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+   
     const title = event.target.title.value;
     const content = event.target.content.value;
     const img = event.target.img.value;
     const id_users = event.target.id_users.value;
     const id_categories = event.target.id_categories.value;
+    // faire en sorte de récupérer automatiquement l'id du user et l'id de la catégorie avec son nom
 
 
-    fetch("http://localhost:8080/api/articles", {
+    const addArticle = await fetch("http://localhost:8080/api/articles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "authorization":'Bearer' + " " + jwtConnexion
       },
       body: JSON.stringify({
         title,
@@ -30,44 +34,55 @@ const CreateArticle = () => {
         img,
         id_users,
         id_categories
-        
       }),
     });
+    
   };
 
 
   return (
     <>
       <Header />
-      <div>
+                
+      
+               
+      <main>
         <h1>Page de création d'article</h1>
+        <section className="create-article">
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              <label>
+                Titre de l'article
+                <input type="text" name="title" /><br /><br />
+              </label>
+              <label>
+                Contenu
+                <textarea id="content" name="content"></textarea><br /><br />
+        
+              </label>
+              <label>
+                Image
+                <input type="text" name="img" /><br /><br />
+                {/* input type=file */}
+              </label>
+              <label>
+                id_users
+                <input type="text" name="id_users" /><br /><br />
+              </label>
+              <label>
+                Catégorie de l'article (id_categories) 
+                <input type="text" name="id_categories" /><br /><br />
+              </label>
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Titre
-            <input type="text" name="title" />
-          </label>
-          <label>
-            Contenu
-            <input type="text" name="content" />
-          </label>
-          <label>
-            Image
-            <input type="text" name="img" /> 
-            {/* voir input type=file */}
-          </label>
-          <label>
-            id_users
-            <input type="text" name="id_users" />
-          </label>
-          <label>
-            id_categories
-            <input type="text" name="id_categories" />
-          </label>
-          <button type="submit">Créer l'article</button>
-          {/* ajouter message ' l'article a bien été ajouté' */}
-        </form>
-      </div>
+              <button className="link-btn" type="submit">Créer l'article</button>
+              
+              {/* {validated ? <p>Article créé</p> : <p>Une erreur est survenue</p>} */}
+              {/* ajouter message ' l'article a bien été ajouté' */}
+            </form>
+          </div>
+        </section>
+        </main>
+      
     </>
   );
 };

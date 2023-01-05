@@ -1,10 +1,11 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
-    const handleSubmit = (event) => {
+    const navigate = useNavigate();
+    const handleSubmit = async (event) => {
         event.preventDefault();
     
         // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
@@ -13,7 +14,7 @@ const Login = () => {
         const password = event.target.password.value;
         
     
-        fetch("http://localhost:8080/api/login", {
+        const jwtResponse = await fetch("http://localhost:8080/api/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -23,6 +24,19 @@ const Login = () => {
             password    
           }),
         });
+
+        const loginData = await jwtResponse.json();
+        console.log(loginData);
+        if (jwtResponse.status === 200 && loginData.roles === 'user') {
+          localStorage.setItem ('jwt', JSON.stringify(loginData))
+          navigate('/avis-parents');
+        } else if (jwtResponse.status === 200 && loginData.roles === 'admin') {
+            localStorage.setItem ('jwt', JSON.stringify(loginData))
+          navigate('/dashboard');
+        } else {
+            navigate('/accueil')
+        }
+
     };
 
     return (
@@ -52,7 +66,8 @@ const Login = () => {
                                 placeholder="Mot de passe"
                             /><br /><br />
                             
-                            <input className="link-btn" type="submit" value="Connexion" />
+                            <button className="link-btn" type="submit">Connexion</button>
+                           
                         </form>
                     </div>
                     <div className="signup-container">
