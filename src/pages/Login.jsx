@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
     
@@ -17,7 +18,7 @@ const Login = () => {
         const jwtResponse = await fetch("http://localhost:8080/api/login", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             email,
@@ -27,6 +28,7 @@ const Login = () => {
 
         const loginData = await jwtResponse.json();
         console.log(loginData);
+        
         if (jwtResponse.status === 200 && loginData.roles === 'user') {
           localStorage.setItem ('jwt', JSON.stringify(loginData))
           navigate('/avis-parents');
@@ -34,7 +36,8 @@ const Login = () => {
             localStorage.setItem ('jwt', JSON.stringify(loginData))
           navigate('/dashboard');
         } else {
-            navigate('/accueil')
+            alert('Combinaison email et mot de pass incorrecte')
+            navigate('/login')
         }
 
     };
@@ -43,7 +46,7 @@ const Login = () => {
         <>
         <Header />
             <main>
-                <h1>Connexion à l'espace parents</h1>
+                <h1>Connexion à votre espace</h1>
                 <section className="login">
                     <p>Cher(s) parent(s), en vous connectant, vous aurez la possibilité de laisser un avis sur l'accueil à la Mam Babychouette, et partager votre expérience mais surtout celle de votre enfant !</p>
                     <div className="form-container">

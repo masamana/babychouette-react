@@ -13,11 +13,36 @@ const ArticleById = () => {
     
 
     const [article, setArticle] = useState([]);
+    const [role, setRole] = useState(null);
+
+    useEffect(() => {
+      const jwtLocalStorage = localStorage.getItem('jwt');
+      const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+      const jwtRole = JSON.parse(jwtLocalStorage).roles;
+      
+      (async () => {
+        const response = await fetch('http://localhost:8080/api/articles/' + id, {
+          method: 'get', 
+          headers: {
+            'authorization': 'Bearer' + " " + jwtConnexion,
+            'Content-Type': 'application.json'
+          },
+        });
+        
+        const article = await response.json();
+  
+        setArticle(article);
+        setRole(jwtRole);
+        
+      })();
+    }, [role]);
+
     const handleDelete = async (id) => {
 
       const jwtLocalStorage = localStorage.getItem('jwt');
       const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
-      const jwtRole = JSON.parse(jwtLocalStorage).roles;
+      // const jwtRole = JSON.parse(jwtLocalStorage).roles;
+      
       
       await fetch("http://localhost:8080/api/articles/" + id, {
         method: "DELETE",
@@ -26,42 +51,38 @@ const ArticleById = () => {
           "authorization":'Bearer' + " " + jwtConnexion
         },
       });
-  
+      alert("L'article a bien été supprimé !")
       navigate('/dashboard');
       // permet de sortir de la liste l'article qui a été supprimé
       setArticle(article.filter((article) => article.id !== id));
     };
-  
-    useEffect(() => {
-      (async () => {
-        const response = await fetch('http://localhost:8080/api/articles/' + id);
-        const article = await response.json();
-  
-        setArticle(article);
-        
-      })();
-    }, []);
-   
 
     return (
         <>
         <Header />
+
+        { role === 'admin' && 
+        
+        <main>
         <article>
-              <h1>{article.title}</h1>
-              <div className="container">
-                <h2>Sous titre de l'article - Catégorie</h2>
-                  <div className="img-container">
-                    <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
-                  </div>
-                <div className="content-article">
-                  <p>{article.content}</p>
-                </div>
+          <h1>{article.title}</h1>
+          <div className="container">
+            <h2>Sous titre de l'article - Catégorie</h2>
+              <div className="img-container">
+                <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
               </div>
+            <div className="content-article">
+              <p>{article.content}</p>
+            </div>
+          </div>
              
-          </article>
-          <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
-          <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
-          <Link className="link-btn" to={'/dashboard'}>Retour à la liste</Link>
+        </article>
+        <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
+        <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
+        <Link className="link-btn" to={'/dashboard'}>Retour à la liste</Link>
+        </main>
+
+        }
         
         </>
     )

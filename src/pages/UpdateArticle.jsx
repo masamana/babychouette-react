@@ -1,18 +1,42 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
 const UpdateArticle = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [article, setArticle] = useState({});
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
+    const jwtLocalStorage = localStorage.getItem('jwt');
+    const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+    const jwtRole = JSON.parse(jwtLocalStorage).roles;
+    
     (async () => {
-      const response = await fetch("http://localhost:8080/api/articles/" + id);
+      const response = await fetch('http://localhost:8080/api/articles/' + id, {
+        method: 'get', 
+        headers: {
+          'authorization': 'Bearer' + " " + jwtConnexion,
+          'Content-Type': 'application.json'
+        },
+      });
+      
       const article = await response.json();
+
       setArticle(article);
+      setRole(jwtRole);
+      
     })();
-  }, [id]);
+  }, [role]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch("http://localhost:8080/api/articles/" + id);
+  //     const article = await response.json();
+  //     setArticle(article);
+  //   })();
+  // }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -40,6 +64,8 @@ const UpdateArticle = () => {
         id_categories
       }),
     });
+    alert("L'article a été modifié avec succès !");
+    navigate('/dashboard');
   };
 
   return (

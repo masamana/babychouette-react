@@ -1,11 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import Header from "../components/Header";
 
 const CreateArticle = () => {
   // créer un formulaire avec champs requis
-  // lors du submit du formulaire, on envoie les données du formulaire au serveur avec
-  // une requête fetch de type POST sur l'URL http://localhost:8080/api/articles
-  
+  // lors du submit du formulaire, on envoie les données du formulaire via la route de l'api
+  const [articles, setArticles] = useState([]);
+  const [role, setRole] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwtLocalStorage = localStorage.getItem('jwt');
+    const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+    const jwtRole = JSON.parse(jwtLocalStorage).roles;
+    
+    (async () => {
+      const response = await fetch('http://localhost:8080/api/articles', {
+        method: 'get', 
+        headers: {
+          'authorization': 'Bearer' + " " + jwtConnexion,
+          'Content-Type': 'application.json'
+        },
+      });
+      
+      const articles = await response.json();
+
+      setArticles(articles);
+      setRole(jwtRole);
+      
+    })();
+  }, [role]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -13,6 +38,7 @@ const CreateArticle = () => {
     
     const jwtLocalStorage = localStorage.getItem('jwt');
     const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+
    
     const title = event.target.title.value;
     const content = event.target.content.value;
@@ -36,16 +62,17 @@ const CreateArticle = () => {
         id_categories
       }),
     });
-    
+    alert("L'article a été ajouté avec succès !");
+    navigate('/dashboard');
   };
 
 
   return (
     <>
       <Header />
-                
-      
-               
+
+      {role === 'admin' &&  
+            
       <main>
         <h1>Page de création d'article</h1>
         <section className="create-article">
@@ -82,6 +109,8 @@ const CreateArticle = () => {
           </div>
         </section>
         </main>
+
+      }
       
     </>
   );
