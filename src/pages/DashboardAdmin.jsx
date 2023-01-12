@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import ListArticlesAdmin from "./ListArticlesAdmin";
 
 
 const DashboardAdmin = (props) => {
     const [articles, setArticles] = useState([]);
     const [role, setRole] = useState(null);
+    const navigate = useNavigate();
   
     useEffect(() => {
       const jwtLocalStorage = localStorage.getItem('jwt');
@@ -16,7 +16,7 @@ const DashboardAdmin = (props) => {
       const jwtRole = JSON.parse(jwtLocalStorage).roles;
       
       (async () => {
-        const response = await fetch('http://localhost:8080/api/articles', {
+        const response = await fetch('http://localhost:8080/api/babychouette/articles', {
           method: 'get', 
           headers: {
             'authorization': 'Bearer' + " " + jwtConnexion,
@@ -25,10 +25,15 @@ const DashboardAdmin = (props) => {
         });
         
         const articles = await response.json();
-  
+        
         setArticles(articles);
         setRole(jwtRole);
-        
+
+        if (jwtRole != 'admin') {
+          alert("Vous devez être administrateur pour accéder à cette page.")
+          navigate('/login');
+        }
+
       })();
     }, []);
 
@@ -41,13 +46,14 @@ const DashboardAdmin = (props) => {
              
 
           <section className="dashboard">
-              <h3>Articles</h3>
+              <h2>Les articles du blog</h2>
               
               <ListArticlesAdmin />
 
           </section>
         </main>
         } 
+        <Footer />
         </>
     )
 };

@@ -21,7 +21,7 @@ const ArticleById = () => {
       const jwtRole = JSON.parse(jwtLocalStorage).roles;
       
       (async () => {
-        const response = await fetch('http://localhost:8080/api/articles/' + id, {
+        const response = await fetch('http://localhost:8080/api/babychouette/articles/' + id, {
           method: 'get', 
           headers: {
             'authorization': 'Bearer' + " " + jwtConnexion,
@@ -34,17 +34,21 @@ const ArticleById = () => {
         setArticle(article);
         setRole(jwtRole);
         
+        if (jwtRole != 'admin') {
+          navigate('/login');
+        } 
       })();
     }, [role]);
+
 
     const handleDelete = async (id) => {
 
       const jwtLocalStorage = localStorage.getItem('jwt');
       const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
-      // const jwtRole = JSON.parse(jwtLocalStorage).roles;
+      const jwtRole = JSON.parse(jwtLocalStorage).roles;
       
       
-      await fetch("http://localhost:8080/api/articles/" + id, {
+      await fetch("http://localhost:8080/api/babychouette/articles/" + id, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -52,40 +56,40 @@ const ArticleById = () => {
         },
       });
       alert("L'article a bien été supprimé !")
-      navigate('/dashboard');
+      navigate('/espace-admin');
       // permet de sortir de la liste l'article qui a été supprimé
       setArticle(article.filter((article) => article.id !== id));
     };
 
     return (
-        <>
-        <Header />
+    <>
+      <Header />
 
-        { role === 'admin' && 
-        
-        <main>
-        <article>
-          <h1>{article.title}</h1>
-          <div className="container">
-            <h2>Sous titre de l'article - Catégorie</h2>
-              <div className="img-container">
-                <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
-              </div>
-            <div className="content-article">
-              <p>{article.content}</p>
+      { role === 'admin' && 
+
+      <main>
+      <article>
+        <h1>{article.title}</h1>
+        <div className="container">
+          <h2>Sous titre de l'article - Catégorie</h2>
+            <div className="img-container">
+              <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
             </div>
+          <div className="content-article">
+            <p>{article.content}</p>
           </div>
-             
-        </article>
-        <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
-        <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
-        <Link className="link-btn" to={'/dashboard'}>Retour à la liste</Link>
-        </main>
+        </div>
+            
+      </article>
+      <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
+      <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
+      <Link className="link-btn" to={'/espace-admin'}>Retour à la liste</Link>
+      </main>
 
-        }
-        
-        </>
-    )
+      }
+      <Footer />
+    </>
+  )
 }
 
 export default ArticleById;

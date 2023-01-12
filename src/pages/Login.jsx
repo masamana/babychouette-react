@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
     
@@ -15,7 +15,7 @@ const Login = () => {
         const password = event.target.password.value;
         
     
-        const jwtResponse = await fetch("http://localhost:8080/api/login", {
+        const jwtResponse = await fetch("http://localhost:8080/api/babychouette/login", {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
@@ -31,10 +31,10 @@ const Login = () => {
         
         if (jwtResponse.status === 200 && loginData.roles === 'user') {
           localStorage.setItem ('jwt', JSON.stringify(loginData))
-          navigate('/avis-parents');
+          navigate('/avis');
         } else if (jwtResponse.status === 200 && loginData.roles === 'admin') {
             localStorage.setItem ('jwt', JSON.stringify(loginData))
-          navigate('/dashboard');
+          navigate('/espace-admin');
         } else {
             alert('Combinaison email et mot de pass incorrecte')
             navigate('/login')
@@ -52,7 +52,7 @@ const Login = () => {
                     <div className="form-container">
                         <form onSubmit={handleSubmit}>
                         
-                            <label>Entrez votre adresse mail *</label><br />
+                            <label htmlFor="email">Entrez votre adresse mail *</label><br />
                             <input
                                 type="email"
                                 name="email"
@@ -61,7 +61,7 @@ const Login = () => {
                                 required
                             /><br /><br />
 
-                            <label>Entrez votre mot de passe</label><br />
+                            <label htmlFor="password">Entrez votre mot de passe</label><br />
                             <input
                                 type="password"
                                 id="password"
@@ -69,27 +69,20 @@ const Login = () => {
                                 placeholder="Mot de passe"
                             /><br /><br />
                             
-                            <button className="link-btn" type="submit">Connexion</button>
-                           
+                            <button className="link-btn" type="submit">Connexion</button>  
                         </form>
                     </div>
                     <div className="signup-container">
                         <div className="content">
                             <p>Si vous n'avez pas encore de compte, c'est par ici !</p>
-                            <Link className="link-btn" to="/creation-compte">Créer un compte</Link>
+                            <Link className="link-btn" to="/inscription">Créer un compte</Link>
                         </div>
                     </div>
                 </section>
             </main>
-            
-       
         < Footer />
         </>
-    ) 
-
-
-
-}
-
+    );
+};
 
 export default Login;

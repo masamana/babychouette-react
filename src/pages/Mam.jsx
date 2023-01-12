@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import LastArticles from "../components/LastArticles";
 
 const Mam = () => {
     return (
@@ -19,8 +20,8 @@ const Mam = () => {
                 </p>
               </div>
             </div>
-
             </section>
+            <LastArticles />
         
         </main>
         <Footer />

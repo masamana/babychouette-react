@@ -14,7 +14,7 @@ const UpdateArticle = () => {
     const jwtRole = JSON.parse(jwtLocalStorage).roles;
     
     (async () => {
-      const response = await fetch('http://localhost:8080/api/articles/' + id, {
+      const response = await fetch('http://localhost:8080/api/babychouette/articles/' + id, {
         method: 'get', 
         headers: {
           'authorization': 'Bearer' + " " + jwtConnexion,
@@ -26,6 +26,10 @@ const UpdateArticle = () => {
 
       setArticle(article);
       setRole(jwtRole);
+
+      if (jwtRole != 'admin') {
+        navigate('/login');
+      }
       
     })();
   }, [role]);
@@ -50,7 +54,7 @@ const UpdateArticle = () => {
     const id_users = event.target.id_users.value;
     const id_categories = event.target.id_categories.value;
 
-    fetch("http://localhost:8080/api/articles/" + id, {
+    fetch("http://localhost:8080/api/babychouette/articles/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -65,40 +69,44 @@ const UpdateArticle = () => {
       }),
     });
     alert("L'article a été modifié avec succès !");
-    navigate('/dashboard');
+    navigate('/espace-admin');
   };
 
   return (
     <>
       <Header />
-      <div>
-        <h1>Modification d'article</h1>
+      {role ==='admin' && 
+      <main>
+        <div>
+          <h1>Modification d'article</h1>
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Titre
-            <input type="text" name="title"/>
-          </label>
-          <label>
-            Contenu
-            <input type="text" name="content" />
-          </label>
-          <label>
-            Image
-            <input type="text" name="img" />
-          </label>
-          <label>
-            id_users
-            <input type="text" name="id_users" />
-          </label>
-          <label>
-            id_categories
-            <input type="text" name="id_categories" />
-          </label>
-          <button className="link-btn" type="submit">Modifier l'article</button>
-        </form>
-      </div>
-      <Link className="link-btn" to={'/article/'+ article.id}> Retour à l'article</Link>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Titre
+              <input type="text" name="title"/>
+            </label>
+            <label>
+              Contenu
+              <input type="text" name="content" />
+            </label>
+            <label>
+              Image
+              <input type="text" name="img" />
+            </label>
+            <label>
+              id_users
+              <input type="text" name="id_users" />
+            </label>
+            <label>
+              id_categories
+              <input type="text" name="id_categories" />
+            </label>
+            <button className="link-btn" type="submit">Modifier l'article</button>
+          </form>
+        <Link className="link-btn" to={'/article/admin/'+ article.id}> Retour à l'article</Link>
+        </div>
+      </main>
+    }
     </>
   );
 };

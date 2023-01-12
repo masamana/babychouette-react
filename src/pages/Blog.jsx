@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const ListArticles = () => {
+const Blog = () => {
     const [articles, setArticles] = useState([]);
   
     // const handleDelete = async (id) => {
@@ -17,7 +17,7 @@ const ListArticles = () => {
   
     useEffect(() => {
       (async () => {
-        const response = await fetch('http://localhost:8080/api/articles');
+        const response = await fetch('http://localhost:8080/api/babychouette/articles');
         const articles = await response.json();
   
         setArticles(articles);
@@ -45,7 +45,7 @@ const ListArticles = () => {
                       {/* <p>{article.content}</p> */}
                       {/* ajouter une limite d'affichage aux 200 premiers caractères */}
                       {/* <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div> */}
-                      <Link className="link-btn" to={"/article/show/" + article.id}>Lire l'article</Link>
+                      <Link className="link-btn" to={"/article/" + article.id}>Lire l'article</Link>
                     </div>
                   </article>
                 );
@@ -59,4 +59,4 @@ const ListArticles = () => {
   
 
 
-export default ListArticles;
+export default Blog;

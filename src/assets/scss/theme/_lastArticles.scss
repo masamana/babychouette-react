@@ -1,11 +1,11 @@
 .last-articles {
     background-color: $orangeClair;
+    // J'utilise une variable déclarée dans un fichier dédié
     margin: 50px 0;
     height: 80vh;
     width: 100%;
 
-    .grid-container {
-        
+    .grid-container {  
         display: grid;
         grid-template-columns: repeat(4,1fr);
         grid-template-rows: repeat(2,200px);
@@ -17,12 +17,12 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-        
         }
 
         .grid-style {
             overflow: hidden;
             position: relative;
+
             .content {
                 padding: 15px;
                 display: flex;
@@ -54,8 +54,33 @@
             &:nth-of-type(4){
                 grid-area: 2 / 4 ;
             }
-
         }
+    }  
+}
+
+@media  screen and (max-width: 768px) {
+// Je spécifie une media query pour les écrans à partir de 768px et moins
+// Desktop first
+// Je réappelle les éléments que je souhaite modifier avec la même priorité
+// et ne modifie qu'eux
+    .last-articles {
+        margin: 50px 0;
+        height: auto;
+        width: 100%;
+
+        .grid-container {
+            // Je change la valeur de display en flex au format tablette et mobile
+            display: flex;
+            flex-wrap: wrap;
+            // J'utilise la valeur wrap afin d'autoriser le retour à la ligne de chaque élément
+            // Je n'ai donc pas besoin d'ajouter la direction de la flexbox
+            justify-content: center;
+    
+            .grid-style {
+                overflow: hidden;
+                position: relative;
+                width: 70%;
+            }
+        }  
     }
-   
 }

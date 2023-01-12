@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LastArticles from "../components/LastArticles";
 import { Link } from "react-router-dom";
 
 const Contact = () => {
@@ -32,10 +33,8 @@ const Contact = () => {
                     <input className="link-btn" type="submit"/>
                   </form>
                 </div>
-
-
-          
               </section>
+              <LastArticles />
             </main>
           <Footer />
         </>

@@ -3,19 +3,20 @@ import { useNavigate } from "react-router";
 import Header from "../components/Header";
 
 const CreateArticle = () => {
-  // créer un formulaire avec champs requis
-  // lors du submit du formulaire, on envoie les données du formulaire via la route de l'api
+  
+//  je crée ici un état avec le hook de React useState, où je stock les données dont j'ai besoin
   const [articles, setArticles] = useState([]);
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
+  // j'utilise ici le hook useEffect pour 
   useEffect(() => {
     const jwtLocalStorage = localStorage.getItem('jwt');
     const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
     const jwtRole = JSON.parse(jwtLocalStorage).roles;
     
     (async () => {
-      const response = await fetch('http://localhost:8080/api/articles', {
+      const response = await fetch('http://localhost:8080/api/babychouette/articles', {
         method: 'get', 
         headers: {
           'authorization': 'Bearer' + " " + jwtConnexion,
@@ -28,16 +29,23 @@ const CreateArticle = () => {
       setArticles(articles);
       setRole(jwtRole);
       
+      if (jwtRole != 'admin') {
+        // alert("Vous devez être administrateur pour accéder à cette page.")
+        navigate('/login');
+      }
+
     })();
+
   }, [role]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+     // lors du submit du formulaire, on envoie les données du formulaire via la route de l'api
     // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
     
     const jwtLocalStorage = localStorage.getItem('jwt');
     const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+    const jwtRole = JSON.parse(jwtLocalStorage).roles;
 
    
     const title = event.target.title.value;
@@ -48,7 +56,7 @@ const CreateArticle = () => {
     // faire en sorte de récupérer automatiquement l'id du user et l'id de la catégorie avec son nom
 
 
-    const addArticle = await fetch("http://localhost:8080/api/articles", {
+    const addArticle = await fetch("http://localhost:8080/api/babychouette/articles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +71,7 @@ const CreateArticle = () => {
       }),
     });
     alert("L'article a été ajouté avec succès !");
-    navigate('/dashboard');
+    navigate('/espace-admin');
   };
 
 
@@ -111,7 +119,6 @@ const CreateArticle = () => {
         </main>
 
       }
-      
     </>
   );
 };

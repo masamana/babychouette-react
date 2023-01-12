@@ -1,10 +1,10 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
-
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -19,7 +19,7 @@ const SignUp = () => {
     const adress = event.target.adress.value;
 
 
-    fetch("http://localhost:8080/api/signup", {
+    fetch("http://localhost:8080/api/babychouette/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,101 +35,98 @@ const SignUp = () => {
         
       }),
     });
+    alert("Le compte a bien été créé !")
+    navigate('/login')
   };
 
 
-    return (
-        <>
-        <Header />
-        <h1>Création d'un compte</h1>
-        <section className="create-account">
-          <div className="form-container">
-            <form onSubmit={handleSubmit}>
-            {/* <input type="radio" name="radio1" value="monsieur" />
-              <label>M.</label>
-              <input type="radio" name="radio1" value="madame" />
-              <label>Mme.</label><br /><br /> */}
-              <label>Entrez votre email *</label><br />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="abc@gmail.com"
+  return (
+  <>
+    <Header />
+      <h1>Création d'un compte</h1>
+      <section className="create-account">
+        <div className="form-container">
+          <form onSubmit={handleSubmit}>
+          <input type="radio" name="radio1" value="monsieur" />
+            <label>M.</label>
+            <input type="radio" name="radio1" value="madame" />
+            <label>Mme.</label><br /><br />
+            
+            <label htmlFor="name">Entrez votre nom *</label><br />
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Nom"
+              required
+            /><br /><br />
+
+            <label htmlFor="first_name">Entrez votre prénom *</label><br />
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              placeholder="Prénom"
+              required
+            /><br /><br />
+            <label htmlFor="email">Entrez votre email *</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="abc@gmail.com"
+              required
+            /><br /><br />
+
+            <label htmlFor="password">Entrez votre mot de passe</label><br />
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Mot de passe"
                 required
-              /><br /><br />
+            /><br /><br />
 
-              <label>Entrez votre mot de passe</label><br />
-              <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Mot de passe"
-                  required
-              /><br /><br />
-
-              <label>Vérification mot de passe</label><br />
-              <input
-                  type="password"
-                  id="repassword"
-                  name="repassword"
-                  placeholder="Mot de passe"
-                  required
-              /><br /><br />
-
-              <label>Entrez votre nom *</label><br />
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Nom"
+            <label htmlFor="repassword">Vérification mot de passe</label><br />
+            <input
+                type="password"
+                id="repassword"
+                name="repassword"
+                placeholder="Mot de passe"
                 required
-              /><br /><br />
+            /><br /><br />
 
-              <label>Entrez votre prénom *</label><br />
-              <input
-                type="text"
-                id="first_name"
-                name="first_name"
-                placeholder="Prénom"
-                required
-              /><br /><br />
+            <label htmlFor="tel">Téléphone *</label><br />
+            <input
+              type="text"
+              id="tel"
+              name="tel"
+              placeholder="Tél"
+              required
+            /><br /><br />
 
-              <label>Téléphone *</label><br />
-              <input
-                type="text"
-                id="tel"
-                name="tel"
-                placeholder="Tél"
-                required
-              /><br /><br />
+            <label htmlFor="adress">Adresse *</label><br />
+            <input
+              type="text"
+              id="adress"
+              name="adress"
+              placeholder="Adresse"
+              required
+            /><br /><br />
 
-              <label>Adresse *</label><br />
-              <input
-                type="text"
-                id="adress"
-                name="adress"
-                placeholder="Adresse"
-                required
-              /><br /><br />
-  
-              <input className="link-btn" type="submit" value="Envoyer" />
-            </form>
+            <button className="link-btn" type="submit" value="Envoyer">Créer le compte</button>
+          </form>
+        </div>
+        {/* <div className="signup-container">
+          <div className="content">
+              <p>Maintenant vous pouvez vous connecter !</p>
+              <Link className="link-btn" to="/login">Retour</Link>
           </div>
-          <div className="signup-container">
-                        <div className="content">
-                            <p>Maintenant vous pouvez vous connecter !</p>
-                            <Link className="link-btn" to="/login">Retour</Link>
-                        </div>
-                    </div>
-          
-        </section>
-
-
-
-        <Footer />
-        </>
-    )
-
+        </div>  */}
+      </section>
+    <Footer />
+  </>
+  )
 }
 
 export default SignUp;

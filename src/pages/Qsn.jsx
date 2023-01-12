@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import LastArticles from "../components/LastArticles";
 import { Link } from "react-router-dom";
 
 const Qsn = () => {
@@ -24,6 +25,7 @@ const Qsn = () => {
               </div>
             </div>
           </section>
+          <LastArticles />
           </main>
           <Footer />
         </>
