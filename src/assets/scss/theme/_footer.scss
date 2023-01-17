@@ -66,7 +66,7 @@ footer {
 
     footer {
         height: auto;
-    }
+    
         .container {
             display: flex;
             flex-direction: column;
@@ -85,19 +85,23 @@ footer {
             }
             
             .content-footer {
+                padding-top: 10px;
                 display: flex;
-                justify-content: center;
-               width: 30%; 
-               ul {
+                justify-content: flex-start;
+                width: 30%; 
+                ul {
                    display: flex;
                    flex-direction: column; 
-               }
-               li {
-                border-left: 1px solid white;
-                padding-left: 10px;
-                color: $blanc;
-               }
+                }
+                li {
+                    border-left: none;
+                    padding-left: 10px;
+                    color: $blanc;
+                }
             }
+            // .content-footer nav {
+
+            // }
             .content-footer ul a {
                 color: $blanc;
                 &:hover {
@@ -124,5 +128,5 @@ footer {
                 font-size: 0.8rem;
             }
         }
-    }
-    
+    }  
+}

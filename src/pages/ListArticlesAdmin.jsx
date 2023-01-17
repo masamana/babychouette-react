@@ -32,14 +32,15 @@ const ListArticlesAdmin = () => {
           <div className="container">
             <Link className="link-btn" to="/create-article">Créer un article</Link>
           </div>
-            <table border="2px">
-
+          <div className="dashboard">
+            <table border={1}>
               <thead>
                   <tr>
-                      <th>Id</th>
-                      <th>Titre</th>
-                      <th>Contenu</th>
-                      <th>Image</th>
+                      <th colSpan={2}>Id</th>
+                      <th colSpan={6}>Titre</th>
+                      <th colSpan={12}>Contenu</th>
+                      <th colSpan={4}>Image</th>
+                      <th colSpan={4}></th>
                       {/* <th>Date</th>  */}
                   </tr>
               </thead>
@@ -54,6 +55,7 @@ const ListArticlesAdmin = () => {
                   })}
               </tbody>
             </table>
+          </div>
           </section>
         </main>
       </>

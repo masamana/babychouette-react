@@ -1,14 +1,12 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // récupérer les paramètres de connexion pour vérifier le rôle dans le jwt et redigirer en fonction
 
     const email = event.target.email.value;
     const password = event.target.password.value;

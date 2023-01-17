@@ -1,94 +1,90 @@
-import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import { useNavigate } from "react-router";
 import Footer from "../components/Footer";
 
 const ArticleById = () => {
-    
-
-    const { id } = useParams();
-    const navigate = useNavigate();
-    
-
-    const [article, setArticle] = useState([]);
-    const [role, setRole] = useState(null);
-
-    useEffect(() => {
-      const jwtLocalStorage = localStorage.getItem('jwt');
-      const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
-      const jwtRole = JSON.parse(jwtLocalStorage).roles;
-      
-      (async () => {
-        const response = await fetch('http://localhost:8080/api/babychouette/articles/' + id, {
-          method: 'get', 
-          headers: {
-            'authorization': 'Bearer' + " " + jwtConnexion,
-            'Content-Type': 'application.json'
-          },
-        });
-        
-        const article = await response.json();
+  const { id } = useParams();
+  const navigate = useNavigate();
   
-        setArticle(article);
-        setRole(jwtRole);
-        
-        if (jwtRole != 'admin') {
-          navigate('/login');
-        } 
-      })();
-    }, [role]);
 
+  const [article, setArticle] = useState([]);
+  const [role, setRole] = useState(null);
 
-    const handleDelete = async (id) => {
-
-      const jwtLocalStorage = localStorage.getItem('jwt');
-      const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
-      const jwtRole = JSON.parse(jwtLocalStorage).roles;
-      
-      
-      await fetch("http://localhost:8080/api/babychouette/articles/" + id, {
-        method: "DELETE",
+  useEffect(() => {
+    const jwtLocalStorage = localStorage.getItem('jwt');
+    const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+    const jwtRole = JSON.parse(jwtLocalStorage).roles;
+    
+    (async () => {
+      const response = await fetch('http://localhost:8080/api/babychouette/articles/' + id, {
+        method: 'get', 
         headers: {
-          "Content-Type": "application/json",
-          "authorization":'Bearer' + " " + jwtConnexion
+          'authorization': 'Bearer' + " " + jwtConnexion,
+          'Content-Type': 'application.json'
         },
       });
-      alert("L'article a bien été supprimé !")
-      navigate('/espace-admin');
-      // permet de sortir de la liste l'article qui a été supprimé
-      setArticle(article.filter((article) => article.id !== id));
-    };
+      
+      const article = await response.json();
 
-    return (
-    <>
-      <Header />
+      setArticle(article);
+      setRole(jwtRole);
+      
+      if (jwtRole != 'admin') {
+        alert("Vous devez être administrateur !")
+        navigate('/login');
+      } 
+    })();
+  }, []);
 
-      { role === 'admin' && 
+  const handleDelete = async (id) => {
 
-      <main>
-      <article>
-        <h1>{article.title}</h1>
-        <div className="container">
-          <h2>Sous titre de l'article - Catégorie</h2>
-            <div className="img-container">
-              <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
-            </div>
-          <div className="content-article">
-            <p>{article.content}</p>
+    const jwtLocalStorage = localStorage.getItem('jwt');
+    const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
+    // const jwtRole = JSON.parse(jwtLocalStorage).roles;
+    
+    await fetch("http://localhost:8080/api/babychouette/articles/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization":'Bearer' + " " + jwtConnexion
+      },
+    });
+    alert("L'article a bien été supprimé !")
+    navigate('/espace-admin');
+    // permet de sortir de la liste l'article qui a été supprimé
+    setArticle(article.filter((article) => article.id !== id));
+  };
+
+  return (
+  <>
+    <Header />
+
+    { role === 'admin' && 
+
+    <main>
+    <article>
+      <h1>{article.title}</h1>
+      <div className="container">
+        <h2>Sous titre de l'article - Catégorie</h2>
+          <div className="img-container">
+            <img className="img-article" src="/img/activite-peinture.jpg" alt=""/>
           </div>
+        <div className="content-article">
+          <p>{article.content}</p>
         </div>
-            
-      </article>
-      <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
-      <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
-      <Link className="link-btn" to={'/espace-admin'}>Retour à la liste</Link>
-      </main>
+      </div>
+          
+    </article>
+    <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
+    <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
+    <Link className="link-btn" to={'/espace-admin'}>Retour à la liste</Link>
+    </main>
 
-      }
-      <Footer />
-    </>
+    }
+    <Footer />
+  </>
   )
 }
 

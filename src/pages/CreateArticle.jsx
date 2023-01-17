@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const CreateArticle = () => {
@@ -9,12 +10,13 @@ const CreateArticle = () => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
-  // j'utilise ici le hook useEffect pour 
+  // J'utillise le hook useEffect pour bloquer le rendu du composant après l'appel fetch vers l'API
+  // Pour éviter un render "infini"
   useEffect(() => {
     const jwtLocalStorage = localStorage.getItem('jwt');
     const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
     const jwtRole = JSON.parse(jwtLocalStorage).roles;
-    
+    // Je fais appel à l'API avec une fonction asynchrone pour permettre l'exécution du reste du code
     (async () => {
       const response = await fetch('http://localhost:8080/api/babychouette/articles', {
         method: 'get', 
@@ -30,12 +32,10 @@ const CreateArticle = () => {
       setRole(jwtRole);
       
       if (jwtRole != 'admin') {
-        // alert("Vous devez être administrateur pour accéder à cette page.")
         navigate('/login');
       }
 
     })();
-
   }, [role]);
 
   const handleSubmit = async (event) => {
@@ -78,47 +78,44 @@ const CreateArticle = () => {
   return (
     <>
       <Header />
-
-      {role === 'admin' &&  
-            
+      {/* Je peux ici conditionner l'affichage de ma page au seul rôle 'admin' */}
+      {role === 'admin' &&         
       <main>
         <h1>Page de création d'article</h1>
         <section className="create-article">
           <div className="form-container">
             <form onSubmit={handleSubmit}>
-              <label>
+              <label htmlFor="title">
                 Titre de l'article
-                <input type="text" name="title" /><br /><br />
+                <input type="text" name="title" id="title"/><br /><br />
               </label>
-              <label>
+              <label htmlFor="content">
                 Contenu
-                <textarea id="content" name="content"></textarea><br /><br />
+                <textarea name="content" id="content"></textarea><br /><br />
         
               </label>
-              <label>
+              <label htmlFor="img">
                 Image
-                <input type="text" name="img" /><br /><br />
+                <input type="text" name="img" id="img"/><br /><br />
                 {/* input type=file */}
               </label>
-              <label>
-                id_users
-                <input type="text" name="id_users" /><br /><br />
+              <label htmlFor="id_users">
+                {/* Récupérer l'id de l'admin par son prénom */}
+                Créé par : 
+                <input type="text" name="id_users" id="id_users"/><br /><br />
               </label>
-              <label>
-                Catégorie de l'article (id_categories) 
-                <input type="text" name="id_categories" /><br /><br />
+              <label htmlFor="id_categories">
+                Catégorie de l'article : 
+                 {/*Récupérer l'id de la catégorie par son nom  */}
+                <input type="text" name="id_categories" id="id_categories"/><br /><br />
               </label>
-
               <button className="link-btn" type="submit">Créer l'article</button>
-              
-              {/* {validated ? <p>Article créé</p> : <p>Une erreur est survenue</p>} */}
-              {/* ajouter message ' l'article a bien été ajouté' */}
             </form>
           </div>
         </section>
         </main>
-
       }
+      <Footer />
     </>
   );
 };

@@ -3,5 +3,17 @@
         display: flex;
         justify-content: flex-end;
     }
+    .dashboard {
+        padding: 25px;
+
+        table {
+            border: solid $bleu 2px;
+            thead {
+                color: $bleu;
+                text-transform: uppercase;
+    
+            }
+        } 
+    }
 
 }
