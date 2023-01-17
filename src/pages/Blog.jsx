@@ -36,16 +36,17 @@ const Blog = () => {
                   <article className="card-article" key={article.id}>
                     <div class="card-header">
                       <img className="img-size" src="/img/jeuCouleur.jpg" alt=""/>
-                      {/* ajouter img.article pour appeler mon api et consommer ma donnée (fetch) */}
+                      {/* ajouter article.img pour appeler mon api et consommer ma donnée (fetch) */}
                       
                     </div>
                     <div className="card-body">
-
-                      <h2>{article.title}</h2>
-                      {/* <p>{article.content}</p> */}
-                      {/* ajouter une limite d'affichage aux 200 premiers caractères */}
-                      {/* <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div> */}
-                      <Link className="link-btn" to={"/article/" + article.id}>Lire l'article</Link>
+                      <div className="content">
+                        <h2>{article.title}</h2>
+                        {/* <p>{article.content}</p> */}
+                        {/* ajouter une limite d'affichage aux 200 premiers caractères */}
+                        {/* <div>first 40 chars <span style="visibility:hidden">last 120 chars</span></div> */}
+                        <Link className="link-btn" to={"/article/" + article.id}>Lire l'article</Link>
+                      </div>
                     </div>
                   </article>
                 );
