@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ArticleDetails from "./ArticleDetails";
 import { Link } from "react-router-dom";
+import LogoutBtn from "../components/LogoutBtn";
 
 const ListArticlesAdmin = () => {
     const [articles, setArticles] = useState([]);
@@ -26,11 +27,12 @@ const ListArticlesAdmin = () => {
     }, []);
   
     return (
-      <>
-        <main> 
+      <> 
+       <h2>Les articles du blog</h2>
         <section className="dashboard-admin">
           <div className="container">
             <Link className="link-btn" to="/create-article">Créer un article</Link>
+            <LogoutBtn />
           </div>
           <div className="dashboard">
             <table border={1}>
@@ -56,8 +58,7 @@ const ListArticlesAdmin = () => {
               </tbody>
             </table>
           </div>
-          </section>
-        </main>
+        </section>
       </>
     );
   };

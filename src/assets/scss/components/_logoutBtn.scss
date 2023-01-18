@@ -1,0 +1,17 @@
+.logout {
+    margin: 20px;
+    color: $blanc;
+    font-family: $snigletRegular;
+    background-color: $orange;
+    border: 1px solid $orange;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: $blanc;
+        border: 1px solid $orange;
+        color: $orange;
+
+    }
+    
+}

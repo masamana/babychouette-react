@@ -48,6 +48,8 @@ const Login = () => {
             alert('Combinaison email et mot de pass incorrecte')
             navigate('/login')
         }
+        // Mon email et password sont visibles dans le payload, trouver comment ne pas
+
     };
 
     return (
@@ -76,6 +78,7 @@ const Login = () => {
                                 id="password"
                                 name="password"
                                 placeholder="Mot de passe"
+                                required
                             /><br /><br />
                             
                             <button className="link-btn" type="submit">Connexion</button>  

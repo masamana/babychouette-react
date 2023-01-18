@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import ListArticlesAdmin from "./ListArticlesAdmin";
 
 
+
 const DashboardAdmin = (props) => {
     const [articles, setArticles] = useState([]);
     const [role, setRole] = useState(null);
@@ -50,17 +51,12 @@ const DashboardAdmin = (props) => {
         <>
         <Header />
         {role === 'admin' &&
-        <main>
-          <h1>Bienvenue dans l'espace Admin</h1>
-             
+          <main>
+            <h1>Bienvenue dans l'espace Admin</h1>
 
-          <section className="dashboard">
-              <h2>Les articles du blog</h2>
-              
               <ListArticlesAdmin />
-
-          </section>
-        </main>
+              
+          </main>
         } 
         <Footer />
         </>

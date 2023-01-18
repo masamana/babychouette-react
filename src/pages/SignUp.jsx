@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -45,7 +46,7 @@ const SignUp = () => {
       <section className="create-account">
         <div className="form-container">
           <form onSubmit={handleSubmit}>
-          <input type="radio" name="radio1" value="monsieur" />
+            <input type="radio" name="radio1" value="monsieur" />
             <label>M.</label>
             <input type="radio" name="radio1" value="madame" />
             <label>Mme.</label><br /><br />
