@@ -63,6 +63,7 @@ header {
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid $bleu;
+            position: relative;
             .logo-container {
                 width: 10vh;
                 margin: 5px 20px;
@@ -73,37 +74,45 @@ header {
             }
             ul.nav-items {
                 background-color: $blanc;
-                display: none;
-                // justify-content: space-evenly;
-                // align-items: center;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
                 text-decoration: none;
                 font-family: $snigletRegular;
-                // a::after {
-                //     content: "";
-                //     display: block;
-                //     background-color: $bleu;
-                //     border-radius: 50%;
-                //     width: 0;
-                //     height: 2px;
-                //     margin: 0.5rem auto 0;
-                //     transition: all 0.3s ease;
-                // }
-                // a:hover::after {
-                //     content: "";
-                //     display: block;
-                //     background-color: $bleu;
-                //     border-radius: 50%;
-                //     width: 70%;
-                //     height: 2px;
-                //     margin: 0.5rem auto 0;
-                // }
-                // &.hiden {
-                //     display: none;
-                // }
+                position: absolute;
+                right: 0%;
+                top: 100%;
+                a:hover {
+                    font-weight: bolder;
+                }
+                a::after {
+                    content: "";
+                    display: none;
+                    // background-color: $bleu;
+                    // border-radius: 50%;
+                    // width: 0;
+                    // height: 3px;
+                    // margin: 0.2rem auto 0;
+                    // transition: all 0.3s ease;
+                }
+                a:hover::after {
+                    content: "";
+                    display: none;
+                    // background-color: $bleu;
+                    // border-radius: 50%;
+                    // width: 70%;
+                    // height: 2px;
+                    // margin: 0.2rem auto 0;
+                }
+                
+                &.hiden {
+                    display: none;
+                }
                 
                 li {
                     list-style: none;  
                     margin: auto; 
+                    padding: 10px 40px;
                 } 
                 
             } 

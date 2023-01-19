@@ -18,7 +18,7 @@ const Header = () => {
               alt="Logo Babychouette"
               />
           </div>
-        <ul className={'nav-items ${display ? "" : "hiden"}'}>
+        <ul className={`nav-items ${display ? "" : "hiden"}`}>
           <li>
               <Link to="/">Accueil</Link>
           </li>
