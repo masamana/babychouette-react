@@ -1,17 +1,24 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [display, setDisplay] = useState(false);
+
+  const handleDisplay = () => {
+    setDisplay(!display);
+  }
+
   return (
     <header>
       <nav className="nav-menu">
-        <ul>
-          <li id="logo">
+          <div className="logo-container">
             <img
               className="logo"
               src="/img/babychouette-logo-blanc.png"
               alt="Logo Babychouette"
-            />
-          </li>
+              />
+          </div>
+        <ul className={'nav-items ${display ? "" : "hiden"}'}>
           <li>
               <Link to="/">Accueil</Link>
           </li>
@@ -31,6 +38,9 @@ const Header = () => {
               <Link to="/login">Coin des parents</Link>
           </li> 
         </ul>
+        <button className="burger" onClick={handleDisplay}>
+          <i className="fa-solid fa-bars fa-3x"></i>
+        </button>
       </nav>
     </header>
   );

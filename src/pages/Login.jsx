@@ -42,7 +42,7 @@ const Login = () => {
           navigate('/avis');
         } else if (jwtResponse.status === 200 && loginData.roles === 'admin') {
             localStorage.setItem ('jwt', JSON.stringify(loginData))
-          navigate('/espace-admin');
+            navigate('/espace-admin');
         // sinon je retourne un message d'erreur et renvoi au formulaire de connexion
         } else {
             alert('Combinaison email et mot de pass incorrecte')
