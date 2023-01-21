@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -45,7 +46,7 @@ const CreateArticle = () => {
     
     const jwtLocalStorage = localStorage.getItem('jwt');
     const jwtConnexion = JSON.parse(jwtLocalStorage).access_token;
-    const jwtRole = JSON.parse(jwtLocalStorage).roles;
+    // const jwtRole = JSON.parse(jwtLocalStorage).roles;
 
    
     const title = event.target.title.value;
@@ -111,9 +112,10 @@ const CreateArticle = () => {
               </label>
               <button className="link-btn" type="submit">Créer l'article</button>
             </form>
+          <Link className="link-btn" to="/espace-admin">Retour</Link>
           </div>
         </section>
-        </main>
+      </main>
       }
       <Footer />
     </>

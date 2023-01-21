@@ -77,13 +77,15 @@ const ArticleById = () => {
       </div>
           
     </article>
-    <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
-    <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button><br/>
-    <Link className="link-btn" to={'/espace-admin'}>Retour à la liste</Link>
-    </main>
+    <div className="btns">
+      <Link className="link-btn" to={'/article/update/'+ article.id}>Modifier l'article</Link>
+      <button className="link-btn" onClick={() => handleDelete(article.id)}>Supprimer l'article</button>
+      <Link className="link-btn" to={'/espace-admin'}>Retour à la liste</Link>
+    </div>
+  </main>
 
     }
-    <Footer />
+  <Footer />
   </>
   )
 }
